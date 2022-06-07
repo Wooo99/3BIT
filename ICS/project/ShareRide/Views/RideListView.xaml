@@ -1,0 +1,81 @@
+﻿<local:UserControlBase x:Class="ShareRide.App.Views.RideListView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ShareRide.App.Views"
+      xmlns:viewModels="clr-namespace:ShareRide.App.ViewModels" 
+      d:DataContext="{d:DesignInstance Type=viewModels:RideListViewModel}"
+      mc:Ignorable="d"
+      d:DesignHeight="450" d:DesignWidth="800">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <!-- search bar -->
+        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <Label>Search by Start location</Label>
+            <TextBox Text="{Binding StartFilterString}"></TextBox>
+            <Label>Search by Destination</Label>
+            <TextBox Text="{Binding DestinationFilterString}"></TextBox>
+            <Label>Search by date</Label>
+            <DatePicker SelectedDate="{Binding StartDateFilter}"></DatePicker>
+            <Button Command="{Binding SetFilters}">Search rides</Button>
+            <Button Command="{Binding ResetFilters}">Reset Filters</Button>
+        </StackPanel>
+        <!-- ride lists -->
+        <StackPanel Grid.Row="0" Grid.Column="1">
+            <Label>My offered rides</Label>
+            <ListBox ItemsSource="{Binding PrivateRides}" d:ItemsSource="{d:SampleData ItemCount=5}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Image MaxHeight="40px" MaxWidth="40px" MinHeight="40px" MinWidth="40px" Source="{Binding Driver.PhotoPath, TargetNullValue={x:Null}}"></Image>
+                            <Label Content="{Binding Driver.FirstName}"></Label>
+                            <Image MaxHeight="40px" MaxWidth="40px" MinHeight="40px" MinWidth="40px" Source="{Binding Car.ImageUrl, TargetNullValue={x:Null}}"></Image>
+                            <Label Content="{Binding Car.Name}"></Label>
+                            <Label Content="{Binding FromCity}"></Label>
+                            <Label>To</Label>
+                            <Label Content="{Binding ToCity}"></Label>
+                            <DatePicker SelectedDate="{Binding StartTime}" IsEnabled="False" ></DatePicker>
+                            <DatePicker SelectedDate="{Binding EstimatedEndTime}" IsEnabled="False"></DatePicker>
+                            <Label Content="{Binding Passengers.Count}"></Label>
+                            <Label>/</Label>
+                            <Label Content="{Binding Car.PassengerSeats}"></Label>
+                            <Button Command="{Binding DataContext.RideDetailsCommand, 
+                                RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Grid} ,AncestorLevel=2}}"
+                                    CommandParameter="{Binding Id}">Details</Button>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Label>Book a ride</Label>
+            <ListBox ItemsSource="{Binding PublicRides}" d:ItemsSource="{d:SampleData ItemCount=5}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Image MaxHeight="40px" MaxWidth="40px" MinHeight="40px" MinWidth="40px" Source="{Binding Driver.PhotoPath, TargetNullValue={x:Null}}"></Image>
+                            <Label Content="{Binding Driver.FirstName}"></Label>
+                            <Image MaxHeight="40px" MaxWidth="40px" MinHeight="40px" MinWidth="40px" Source="{Binding Car.ImageUrl, TargetNullValue={x:Null}}"></Image>
+                            <Label Content="{Binding Car.Name}"></Label>
+                            <Label Content="{Binding FromCity}"></Label>
+                            <Label>To</Label>
+                            <Label Content="{Binding ToCity}"></Label>
+                            <DatePicker SelectedDate="{Binding StartTime}" IsEnabled="False" ></DatePicker>
+                            <DatePicker SelectedDate="{Binding EstimatedEndTime}" IsEnabled="False"></DatePicker>
+                            <Label Content="{Binding Passengers.Count}"></Label>
+                            <Label>/</Label>
+                            <Label Content="{Binding Car.PassengerSeats}"></Label>
+                            <Button Command="{Binding DataContext.RideBookCommand, 
+                                RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Grid} ,AncestorLevel=2}}"
+                                    CommandParameter="{Binding Id}">Book</Button>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Label>Book a ride</Label>
+        </StackPanel>
+    </Grid>
+</local:UserControlBase>
