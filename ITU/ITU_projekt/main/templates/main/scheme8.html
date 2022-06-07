@@ -1,0 +1,292 @@
+<!doctype html>
+{% load static %}
+<html>
+  <head>
+    <title> VUT FIT billiard league</title>
+    <link href = "titllepicture.ico" type="image/x-icon" rel = "shortcut icon">
+    <style>
+     body {
+        background-size: cover;
+        background-color: black;
+        background-image: url("{% static 'img/Background.jpg' %}");
+        background-repeat: no-repeat;
+        background-position: center;
+        text-align: center;
+        min-width: 640px ;
+        background-size: 125%;
+      }
+      p{
+        font-size:50px;
+        font-weight: bold;
+        font-family: 'Courier New', monospace;
+      }
+      #container {
+        width: 95%;
+        height: 560px;
+        margin :auto;
+        text-align: center;
+      }
+      #FirstMatches{
+        text-align: center;
+	      padding: 5px;
+        height:150px;
+      }
+      #MatchesOne{
+        float:left;
+        width: 20%;
+        padding-bottom: 50px;
+        padding-left: 2.5%;
+        padding-right: 2.5%;
+      }
+      #Semifinals{
+
+        height:150px;
+      }
+      #MatchesTwo{
+        float:left;
+        width: 30%;
+        margin: 0 auto;
+        padding-bottom: 40px;
+        padding-left: 15%;
+        padding-right: 5%;
+      }
+      #Finals{
+        margin-top: -10px;
+        float:center;
+        text-align:center;
+        width: 95%;
+        margin:auto;
+      }
+      #Final{
+        padding-left: 40%;
+      }
+      #bottom img{
+        position:fixed;
+        bottom:40px;
+        right:10%;
+        float:right;
+        -webkit-filter: drop-shadow(3px 3px 3px black );
+        filter: drop-shadow(6px 6px 6px black);
+      }
+      table,td,th{
+      border: 2px solid grey;
+      padding: 4px;
+      text-align: center;
+      border-radius:2px;
+      }
+      table {
+      border-collapse: collapse;
+      background-color: #000000da;
+      color: white;
+      font-family: 'Courier New', monospace;
+      }
+      h1 {
+        overflow: hidden;
+        text-align: center;
+        font-size: 15px;
+        font-family: 'Courier New', monospace;
+        font-weight: bold;
+      }
+      h1:before,
+      h1:after {
+          background-color: #000;
+          content: "";
+          display: inline-block;
+          height: 1px;
+          position: relative;
+          vertical-align: middle;
+          width: 50%;
+      }
+      h1:before {
+          right: 0.5em;
+          margin-left: -50%;
+      }
+      h1:after {
+          left: 0.5em;
+          margin-right: -50%;
+      }
+
+    </style>
+  </head>
+  <body>
+    <p>TOURNAMENT NAME<p></p>
+    <div id="container">
+      <h1>Quarterfinal</h1>
+    <div id="FirstMatches">
+      <div id = "MatchesOne">
+        <table>
+          <thead>
+            <tr>
+              <th colspan="2"> Match 1</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Player</td>
+              <td>Winner</td>
+            </tr>
+            <tr>
+              <td>xlogin1</td>
+              <td>*</td>
+            </tr>
+            <tr>
+              <td>xlogin2</td>
+              <td></td>
+            </tr>
+          </tbody>
+          </table>
+          </div>
+          <div id = "MatchesOne">
+          <table>
+            <thead>
+              <tr>
+                <th colspan="2"> Match 2</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Player</td>
+                <td>Winner</td>
+              </tr>
+              <tr>
+                <td>xlogin1</td>
+                <td>*</td>
+              </tr>
+              <tr>
+                <td>xlogin2</td>
+                <td></td>
+              </tr>
+            </tbody>
+            </table>
+          </div>
+          <div id = "MatchesOne">
+            <table>
+              <thead>
+                <tr>
+                  <th colspan="2"> Match 3</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Player</td>
+                  <td>Winner</td>
+                </tr>
+                <tr>
+                  <td>xlogin1</td>
+                  <td>*</td>
+                </tr>
+                <tr>
+                  <td>xlogin2</td>
+                  <td></td>
+                </tr>
+              </tbody>
+              </table>
+            </div>
+            <div id = "MatchesOne">
+              <table>
+          <thead>
+            <tr>
+              <th colspan="2"> Match 4</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Player</td>
+              <td>Winner</td>
+            </tr>
+            <tr>
+              <td>xlogin1</td>
+              <td>*</td>
+            </tr>
+            <tr>
+              <td>xlogin2</td>
+              <td></td>
+            </tr>
+          </tbody>
+          </table>
+        </div>
+    </div>
+    <h1>Semifinal</h1>
+    <div id="Semifinals">
+      <div id = "MatchesTwo">
+        <table>
+          <thead>
+            <tr>
+              <th colspan="2"> Match 5</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Player</td>
+              <td>Winner</td>
+            </tr>
+            <tr>
+              <td>xlogin1</td>
+              <td>*</td>
+            </tr>
+            <tr>
+              <td>xlogin2</td>
+              <td></td>
+            </tr>
+          </tbody>
+          </table>
+        </div>
+        <div id = "MatchesTwo">
+          <table>
+            <thead>
+              <tr>
+                <th colspan="2"> Match 6</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Player</td>
+                <td>Winner</td>
+              </tr>
+              <tr>
+                <td>xlogin1</td>
+                <td>*</td>
+              </tr>
+              <tr>
+                <td>xlogin2</td>
+                <td></td>
+              </tr>
+            </tbody>
+            </table>
+          </div>
+    </div>
+    <h1>Final</h1>
+    <div id = "Finals">
+        <div id = "Final">
+          <table>
+            <thead>
+              <tr>
+                <th colspan="2"> Final Match</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Player</td>
+                <td>Winner</td>
+              </tr>
+              <tr>
+                <td>xlogin1</td>
+                <td>*</td>
+              </tr>
+              <tr>
+                <td>xlogin2</td>
+                <td></td>
+              </tr>
+            </tbody>
+            </table>
+          </div>
+        </div> 
+    </div>
+  </div>
+  <div id = bottom>
+    <a href="https://www.youtube.com/watch?v=FqC2lO3Yy_4">
+      <img alt="back" src="{% static 'img/back.png' %}" width="100">
+   </a>
+  </div>
+  </body>
+</html>

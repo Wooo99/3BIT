@@ -1,0 +1,58 @@
+<!doctype html>
+{% load static %}
+{% load crispy_forms_tags %}
+<html>
+  <head>
+    <title> VUT FIT billiard league</title>
+    <link href = "{% static 'img/titllepicture.ico' %}" type="image/x-icon" rel = "shortcut icon">
+    <style>
+    body {
+      background-size: cover;
+      background-color: black;
+      background-image: url("{% static 'img/Background.jpg' %}");
+      background-repeat: no-repeat;
+      background-position: center;
+      text-align: center;
+    }
+    body img{
+      padding-top: 100px;
+      padding-bottom: 100px;
+      width: 500px;
+    }
+
+    button {
+      display: inline-block;
+      width: 60%;
+      height: 60px;
+      letter-spacing: 2px;
+      font-size: 20px;
+      margin-bottom: 10px;
+      background-color: rgba(0, 0, 0, 0.507);
+      border: 1px solid #d9dddd;
+      border-radius: 2px;
+      text-shadow: #141919;
+      color: #d9dddd;
+    }
+
+    button:hover{
+      background-color: #2f973d00;
+      border: 2px solid white;
+      text-shadow: 2px 2px 2px black;
+      color: #fff;
+      font-weight: bold;
+    }
+
+    button:active{
+      background-color: #00000075;
+    }
+    </style>
+  </head>
+  <body>
+    <img src= "{% static 'img/logoblack.png' %}" alt = "logo"><br>
+    <form method="post">
+        {% csrf_token %}
+        {{ form | crispy }}
+      <button type="submit" class="button-login">Sign up</button>
+    </form>
+  </body>
+</html>

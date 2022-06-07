@@ -1,0 +1,315 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <style>
+    body {
+        font-family: 'Courier New', monospace;
+        letter-spacing: 2px;
+        font-weight: bold;
+        text-align: center;
+        height: 100%;
+        background-color: black;
+        background-image: url("{% static 'img/Background.jpg' %}");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        background-position: center;
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+    .btn_result:hover {
+        border: 2px solid black;
+        color: black;
+        font-weight: bold;
+        background: white;
+
+    }
+    .btn_result {
+        background-color: black;
+        color: white;
+    }
+    .btn-check:checked + .btn_result {
+        background-color: #fff;
+        border: 1px solid black;
+        color: black;
+        font-weight: bold;
+    }
+
+    .submit-btn:hover {
+        text-shadow: 2px 2px 2px black;
+        color: #fff;
+        font-weight: bold;
+    }
+    .submit-btn {
+        border: 2px solid black;
+        background: url("{% static 'img/Button.jpg' %}");
+        background-size: cover;
+        background-position: center;
+        margin-top: 2vh;
+    }
+    .submit-btn:active{
+      background-color: black;
+      color: black;
+    }
+
+    .cup {
+        width: 4vh;
+        margin-left: 1vh;
+        margin-bottom: 1vh;
+    }
+    #name_field {
+        font-size: 6.5vh;
+        color: white;
+        font-family: 'Courier New', monospace;
+        font-weight: bold;
+        text-shadow: 5px 5px 5px black;
+        justify-content: center;
+        word-break: break-all;
+    }
+
+    #elo_field {
+        background: white;
+        width: max-content;
+        margin: auto;
+        border-radius: 1vh;
+        padding-top: 0.5vh;
+        padding-left: 1vh;
+        padding-right: 1.5vh;
+        font-size: 4vh;
+        color: coral;
+        text-outline: 2px black;
+        font-family: 'Courier New', monospace;
+        font-weight: bold;
+        margin-top: -1vh;
+    }
+    #versus{
+        width: 100%;
+        border-bottom: 0.5vh solid black;
+        border-top: 0.5vh solid black;
+        margin: auto;
+        margin-top: 3vh;
+        margin-bottom: 1vh;
+        font-size: 5vh;
+        color: black;
+        font-family: 'Courier New', monospace;
+        font-weight: bold;
+        font-style: italic;
+    }
+
+    .result_prompt {
+        width: 100%;
+        margin: auto;
+        margin-top: 30px;
+        margin-bottom: -5px;
+        font-size: 4vh;
+        color: black;
+        font-family: 'Courier New', monospace;
+        font-weight: bold;
+    }
+    .btn-group {
+        width: 100%;
+        margin-bottom: 2vh;
+    }
+    .quit_btn:hover {
+        font-weight: bold;
+    }
+    .quit_btn {
+        margin: auto;
+        margin-top: 2vh;
+    }
+    .player2 {
+        margin: auto;
+        background-color: black;
+        border-radius: 5px;
+        min-width: min-content;
+        max-width: 100%;
+        font-size: 2.5vh;
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+    </style>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        <div id="name_field">
+            {{ player1 }}
+        </div>
+        <div id="elo_field">
+            {{ elo1 }}<img src= "{% static 'img/cup.png' %}" class = "cup" alt = "cup"><br>
+        </div>
+        <div id="versus">Vs.</div>
+        <div id="name_field">
+            {{ player2 }}
+        </div>
+        <div id="elo_field" style="margin-bottom: 10px">
+            {{ elo2 }}<img src= "{% static 'img/cup.png' %}" class = "cup" alt = "cup"><br>
+        </div>
+
+        {# Dashboard only displayed to the match creator. #}
+        <div id="player1_dashboard" style="display: none">
+            <div id='res_prompt' class="result_prompt">Choose the winner</div>
+            <div id='res_btns' class="btn-group btn-group-lg" role="group" aria-label="Basic radio toggle button group">
+              <input type="radio" class="btn-check" value="{{ player1 }}" name="btnradio" id="btnradio1" autocomplete="off">
+              <label class="btn btn_result btn-outline-secondary" for="btnradio1" style="font-size: 20px; word-break: break-all;">{{ player1 }}</label>
+
+              <input type="radio" class="btn-check" value="{{ player2 }}" name="btnradio" id="btnradio2" autocomplete="off">
+              <label class="btn btn_result btn-outline-secondary" for="btnradio2" style="font-size: 20px; word-break: break-all;">{{ player2 }}</label>
+            </div>
+        </div>
+
+        {# Waiting prompt displayed to the opponent, when the match creator hasn't yet started the match #}
+        <div id="player2_waiting" style="display: none">
+            <div class="player2 d-flex text-white d-flex justify-content-between align-items-center">
+                <div id="waiting_prompt" style="max-width: 80%">
+                    Waiting for {{ player1 }} to start...
+                </div>
+                <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
+            </div>
+        </div>
+
+        {# Dashboard only displayed to the match creator. #}
+        <div id="player2_dashboard" style="display: none">
+            <div id='res_prompt' class="result_prompt">Match started!</div>
+            <div id="player2_result" class="d-flex text-white player2 d-flex justify-content-between align-items-center">
+                <div style="max-width: 80%">
+                    {{ player1 }} will pick a winner
+                </div>
+                <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
+            </div>
+            <div>
+                <button id="submit_result" type="submit" name='accept' value="accept" class="btn submit-btn btn-secondary btn-lg" {{ acceptDisable }}>{{ accept}}</button><br>
+            </div>
+        </div>
+
+        <button id="cancel_result" name="cancel" value='cancel' class="quit_btn btn btn-secondary btn-lg btn-danger" {{ cancelDisable }}>Quit match</button>
+    </form>
+    <!-- JQuery script -->
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+    <script
+      src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"
+      integrity="sha256-xH4q8N0pEzrZMaRmd7gQVcTZiFei+HfRTBPJ1OGXC0k="
+      crossorigin="anonymous">
+    </script>
+
+    {# Script block with AJAX calls #}
+    <script>
+        // Periodical query waiting for updates in the database
+        function match_started(){
+            // Different queries are sent based on who is viewing the template
+            if (window.location.pathname.toString() === "/match/new/") {
+                $.ajax({
+                    type: 'POST',
+                    url: "match_started_new",
+                    data: {
+                        csrfmiddlewaretoken: '{{ csrf_token }}',
+                        'match_id': '{{ code }}',
+                    },
+                    success: function (data) {
+                        // Redirect player if the match was concluded
+                        if (data.redirect_me !== null) {
+                            location.pathname = data.redirect_me;
+                        }
+                        setTimeout(match_started, 3000)
+                    }
+                });
+            } else {
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ code }}/match_started_joined",
+                    data: {
+                        csrfmiddlewaretoken: '{{ csrf_token }}', //This is must for security in Django
+                        'match_id': '{{ code }}',
+                    },
+                    success: function (data) {
+                        // Display dashboard for player 2 if the match has started
+                        if (data.match_begin === true) {
+                            $('#player2_waiting').hide();
+                            $('#player2_dashboard').show();
+                            $('#cancel_result').prop('disabled', true);
+                            $('#submit_result').html("Confirm result");
+                        // Display the result of the match if the match creator selected a winner
+                        } if (data.winner !== null) {
+                            $('#player2_result').html("The winner is: " + data.winner);
+                            $('#submit_result').removeAttr("disabled");
+                        //The match is concluded, player is redirected
+                        } if (data.redirect_me !== null) {
+                            $('#player2_dashboard').hide();
+                            $('#waiting_prompt').html("Returning to home screen...");
+                            $('#player2_waiting').show();
+                            location.pathname = data.redirect_me;
+                        }
+                        setTimeout(match_started, 3000);
+                    }
+                });
+            }
+        }
+
+        if (window.location.pathname.toString() === "/match/new/") {
+            // Asynchronous update from the match creator when a winner was picked.
+            $('input[type=radio]').change(function () {
+                var winner = $(this).val();
+                $.ajax({
+                    type: 'POST',
+                    url: "match_started_new",
+                    data: {
+                        csrfmiddlewaretoken: '{{ csrf_token }}', //This is must for security in Django
+                        'match_id': '{{ code }}',
+                        'winner': winner,
+                    }
+                });
+            });
+        }
+
+        if (window.location.pathname.toString() !== "/match/new/") {
+            // Asynchronous update from the opponent if the result was confirmed.
+            $('#submit_result').click(function () {
+                var accept = $(this).val();
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ code }}/match_started_joined",
+                    data: {
+                        csrfmiddlewaretoken: '{{ csrf_token }}',
+                        'accept': accept,
+                    }
+                });
+            });
+            $('#cancel_result').click(function () {
+                var cancel = $(this).val();
+                console.log(cancel);
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ code }}/match_started_joined",
+                    data: {
+                        csrfmiddlewaretoken: '{{ csrf_token }}',
+                        'cancel': cancel,
+                    },
+                    success: function (data) {
+                        location.pathname = data.redirect_me;
+                    }
+                });
+            });
+        }
+
+        // Load different dashboards for the match creator and opponent
+        $(document).ready(function() {
+             if (window.location.pathname.toString() === "/match/new/") {
+                 $('#player1_dashboard').show();
+             } else {
+                 $('#player2_waiting').show();
+             }
+            setTimeout(match_started, 3000);
+        });
+    </script>
+
+    <!--Separate Popper and Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+</body>
+</html>

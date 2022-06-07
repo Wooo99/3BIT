@@ -1,0 +1,108 @@
+<!doctype html>
+{% load static %}
+<html>
+  <head>
+    <title> VUT FIT billiard league</title>
+    <link href = "titllepicture.ico" type="image/x-icon" rel = "shortcut icon">
+      <style>
+      body {
+        background-size: cover;
+        background-color: black;
+        background-image:  url("{% static 'img/Background.jpg' %}");
+        background-repeat: no-repeat;
+        background-position: center;
+        text-align: center;
+        font-family: 'Courier New', monospace;
+      }
+      #description{
+        padding-top:10px;
+        margin-top:100px;
+        padding-bottom: 50px;
+        margin-bottom: 20px;
+        background-color: black;
+        color: white;
+        border-radius: 20px;
+        box-shadow: 1px 1px 2px white;
+      }
+      #slots{
+        padding-top:10px;
+        padding-bottom:10px;
+        background-color: black;
+        color: white;
+        border-radius: 20px;
+        width: 25%;
+        height: 100px;
+        margin:auto;
+        margin-bottom:40px;
+        box-shadow: 1px 1px 2px white;
+      }
+      #bottom{
+        float:right;
+        position:fixed;
+        bottom:40px;
+        right:10%;
+        -webkit-filter: drop-shadow(3px 3px 3px black );
+        filter: drop-shadow(6px 6px 6px black);
+      }
+      #buttons{
+        display: flex;
+        height: 100px;
+      }
+      #buttona{
+        flex: 50%;
+        text-decoration: none;
+        color: white;
+      }
+      #buttons #buttona a{
+        margin-top: -20px;
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+        font-family: 'Courier New', monospace;
+        -webkit-filter: drop-shadow(3px 3px 3px black );
+        filter: drop-shadow(6px 6px 6px black);
+        display:inline-block;
+        padding: 10px;
+      }
+      #buttons #buttona a:hover{
+        -webkit-filter: drop-shadow(3px 3px 3px black );
+        filter: drop-shadow(6px 6px 6px rgba(0, 128, 0, 0.486));
+      }
+      #buttons #buttona a:active{
+        -webkit-filter: drop-shadow(3px 3px 3px black );
+        filter: drop-shadow(6px 6px 6px rgba(128, 0, 0, 0));
+      }
+      </style>
+  </head>
+  <body>
+    <h1>TOURNAMENT - Name of tournament</h1>
+
+    <div id= description>
+      <h2>DESCRIPTION:</h2>
+      <p>The description of the tournament and the win will be written here</p>
+    </div>
+    <div id= slots>
+      <h2>SLOTS:</h2>
+      <p>xx/yy</p>
+    </div>
+    <div id = "buttons">
+      <div id = "buttona">
+      <a href="https://www.youtube.com/watch?v=FqC2lO3Yy_4">
+        <img alt="scheme" src="{% static 'img/scheme.png' %}") width="100">
+        <p>Scheme</p>
+      </a>
+      </div>
+      <div id = "buttona">
+      <a href="https://www.youtube.com/watch?v=FqC2lO3Yy_4">
+        <img alt="Logout" src="{% static 'img/notregistered.png' %}") width="100">
+      <p>Register</p>
+      </a>
+    </div>
+    </div>
+    <div id = "bottom">
+      <a href="https://www.youtube.com/watch?v=FqC2lO3Yy_4">
+        <img alt="back" src="{% static 'img/back.png' %}") width="100">
+      </a>
+      </div>    
+  </body>
+</html>

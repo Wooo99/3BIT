@@ -1,0 +1,98 @@
+<!doctype html>
+{% load static %}
+<html>
+  <head>
+    <title> VUT FIT billiard league</title>
+    <link href = "titllepicture.ico" type="image/x-icon" rel = "shortcut icon">
+      <style>
+      body {
+        background-size: cover;
+        background-color: black;
+        background-image: url("{% static 'img/Background.jpg' %}");
+        background-repeat: no-repeat;
+        background-position: center;
+        text-align: center;
+        font-family: 'Courier New', monospace;
+      }
+      #topbar{
+        height: 200px;
+      }
+      #topbar img{
+        padding:20px;
+        width: 200px;
+        float: left;
+      }
+      #content{
+        padding:20px;
+        padding-bottom: 80px;
+      }
+      #content p{
+        margin: 0 auto;
+        width: 50px;
+        display: inline-block;
+        border: 3px solid black;
+        border-radius: 10px;
+        padding: 10px;
+        padding-left: 170px;
+        padding-right: 170px;
+      }
+      #buttons{
+        padding: 40px;
+        height:70px;
+      }
+      #buttons a{
+        float:left;
+        width: 50%;
+        -webkit-filter: drop-shadow(3px 3px 3px black );
+        filter: drop-shadow(6px 6px 6px black);
+        color: white;
+        font-weight: bold;
+        font-family: 'Courier New', monospace;
+        -webkit-filter: drop-shadow(3px 3px 3px black );
+        filter: drop-shadow(6px 6px 6px black);
+      }
+      #buttons a p{
+        font-size: 25px;
+        text-decoration: none;
+        background-color: transparent;
+        color: white;
+        font-weight: bold;
+        font-family: 'Courier New', monospace;
+        -webkit-filter: drop-shadow(3px 3px 3px black );
+        filter: drop-shadow(6px 6px 6px black);
+      }
+      #bottom{
+        float:right;
+        position:fixed;
+        bottom:40px;
+        right:10%;
+        -webkit-filter: drop-shadow(3px 3px 3px black );
+        filter: drop-shadow(6px 6px 6px black);
+      }
+      </style>
+  </head>
+  <body>
+    <div id= "topbar">
+      <img src= "{% static 'img/smallblacklogo.png' %}" class = "logo" alt = "logo"><br>
+    </div>
+    <div id= "content">
+    <h2> NAME:</h2>
+    <p>blahblah</p>
+    <h2> ELO:</h2>
+    <p>42069</p>
+    </div>
+    <div id="buttons">
+      <a href="https://www.youtube.com/watch?v=FqC2lO3Yy_4">
+        <img alt="Logout" src="{% static 'img/logout.png' %}") width="100">
+      </a>
+      <a href="https://www.youtube.com/watch?v=FqC2lO3Yy_4">
+        <p>Delete account</p> 
+      </a>
+      </div>
+     <div id = "bottom">
+    <a href="https://www.youtube.com/watch?v=FqC2lO3Yy_4">
+      <img alt="back" src="{% static 'img/back.png' %}") width="100">
+    </a>
+    </div>
+  </body>
+</html>

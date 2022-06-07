@@ -1,0 +1,316 @@
+<!doctype html>
+{% load static %}
+<html>
+  <head>
+    <title> VUT FIT billiard league</title>
+    <link href = "{% static 'img/titllepicture.ico' %}" type="image/x-icon" rel = "shortcut icon">
+      <style>
+      body {
+        background-size: cover;
+        background-color: black;
+        background-image: url("{% static 'img/Background.jpg' %}");
+        background-repeat: no-repeat;
+        background-position: center;
+        text-align: center;
+      }
+      #topbar {
+          height:80px;
+      }
+      #topbar .logo{
+        width: 150px;
+        position: static;
+        padding-top: 30px;
+        padding-left: 20px;
+        float: left;
+      }
+      #topbar .acc{
+        width: 90px;
+        position: static;
+        float: right;
+        padding-top:18px;
+        padding-right: 60px;
+        -webkit-filter: drop-shadow(2px 2px 2px white );
+        filter: drop-shadow(2px 2px 2px white);
+      }
+      #score img{
+        width: 50px;
+      }
+      #score p{
+        font-size: 100px;
+        color: white;
+        font-family: 'Courier New', monospace;
+        font-weight: bold;
+        text-shadow: 5px 5px 5px black;
+      }
+      #tournament{
+        font-family: 'Courier New', monospace;
+        letter-spacing: 2px;
+        height:70px;
+        text-align: left;
+        background-color: black;
+        width: 90%;
+        margin:auto;
+        margin-top: -70px;
+        color:white;
+        margin-bottom: 20px;
+      }
+      #tournament button{
+        font-family: 'Courier New', monospace;
+        font-weight: bold;
+        float: right;
+        height:100%;
+        width: 70px;
+        margin-top: -34px; 
+        font-size: 20px;
+        border: 2px solid black;
+        background: url("{% static 'img/Button.jpg' %}");
+        background-size: cover;
+        background-position: center;
+      }
+
+      button:hover{
+      text-shadow: 2px 2px 2px black;
+      color: #fff;
+      font-weight: bold;
+    }
+
+    button:active{
+      background-color: black;
+      color: black;
+    }
+    #boards{
+      font-family: 'Courier New', monospace;
+      letter-spacing: 2px;
+      font-weight: bold;
+      width: 90%;
+      margin:auto;
+      height: 400px;
+    }
+    #boards #leaderboard{
+      width: 48%;
+      background-color: black;
+      float:left;
+      height: 100%;
+      box-shadow: 1px 1px 2px #158f40;
+      color:white;
+    }
+
+    #boards #matches{
+      width: 48%;
+      background-color: black;
+      float:right;
+      height: 100%;
+      box-shadow: 1px 1px 2px #158f40;
+      color:white;
+    }
+    #new-game button{
+      margin:auto;
+      margin-top:-100px;
+      display: inline-block;
+      width: 33%;
+      height: 60px;
+      border-radius: 10px;
+      border: 2px solid black;
+      background: url("{% static 'img/Button.jpg' %}");
+      background-size: cover;
+      background-position: center;
+      font-family: 'Courier New', monospace;
+      font-weight: bold;
+      font-size: 25px;
+    }
+  
+    /*
+        CSS for the popup box
+        Author: Marek Dohnal
+    */
+    .popup-bkgr{
+        background:rgba(0,0,0,.4);
+        cursor:pointer;
+        height:100%;
+        position:fixed;
+        text-align:center;
+        top:0;
+        width:100%;
+        z-index:10000;
+    }
+    .popup-bkgr .helper{
+        display:inline-block;
+        height:100%;
+        vertical-align:middle;
+    }
+    .popup-bkgr > div {
+        background-color: black;
+        color: white;
+        font-family: "Courier New", monospace;
+        box-shadow: 10px 10px 60px #555;
+        display: inline-block;
+        height: auto;
+        max-width: 250px;
+        min-height: 200px;
+        vertical-align: middle;
+        width: 60%;
+        position: relative;
+        border-radius: 8px;
+        padding: 15px 5%;
+    }
+    .popupCloseButton {
+        border: 3px solid black;
+        border-radius: 10px;
+        color: gainsboro;
+        cursor: pointer;
+        display: inline-block;
+        font-family: arial;
+        position: absolute;
+        top: 2px;
+        right: 2px;
+        font-size: 35px;
+        line-height: 30px;
+        width: 30px;
+        height: 30px;
+        text-align: center;
+    }
+    .popupCloseButton:hover {
+        border: 3px solid #999;
+        border-radius: 10px;
+    }
+    #choose-game button {
+        margin:auto;
+        margin-top: 25px;
+        display: inline-block;
+        width: 80%;
+        height: 60px;
+        border-radius: 10px;
+        border: 2px solid black;
+        background: url("{% static 'img/Button.jpg' %}");
+        background-size: cover;
+        background-position: center;
+        font-family: 'Courier New', monospace;
+        font-weight: bold;
+        font-size: 25px;
+    }
+    #popup-title {
+        font-family: 'Courier New', monospace;
+        letter-spacing: 2px;
+        color: white;
+        font-weight: bold;
+        font-size: 25px;
+        margin-top: -7px;
+    }
+      </style>
+  </head>
+  <body>
+
+    <div id="topbar">
+      <img src= "{% static 'img/smallblacklogo.png' %}" class = "logo" alt = "logo"><br>
+      <a href="/logout/">
+      <img src= "{% static 'img/acc.png' %}" class = "acc" alt = "account"><br>
+      </a>
+    </div>
+{% if user.is_authenticated %}
+    <div id="score">
+      <p>{{ elo }}<img src= "{% static 'img/cup.png' %}" class = "cup" alt = "cup"><br></p>
+    </div>
+
+    <div id="tournament">
+        <p>TOURNAMENT</p>
+        <button class = "join" type="button">JOIN</button><br>
+    </div>
+    <div id="boards">
+        <div id = "leaderboard">
+          LEADERBOARD
+            <ol>
+                {% for player in leaders %}
+                    <li>{{player.userName}} {{player.elo}}</li>
+                {% endfor %}
+            </ol>
+        </div>
+        <div id = "matches">
+
+          LAST MATCHES
+            <ul>
+                {% for match in matches %}
+                    <li>{{match.player1.username}} vs. {{match.player2.username}} => {{ match.winner.username }} WON!</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div id="new-game">
+      <button class = "NEW" type="button">NEW GAME</button><br>
+    </div>
+
+    <!--
+        New game pop-up
+        Author: Marek Dohnal
+    -->
+    <div id = "game_sel" class="popup-bkgr" hidden>
+        <span class="helper"></span>
+        <div>
+            <div class="popupCloseButton">&times;</div>
+            <div id="popup-title">NEW GAME</div>
+            <div id="choose-game">
+                <button id="join_game" class = "NEW" type="button">Join Game</button><br>
+                <button id="create_game" class = "NEW" type="button">Create Game</button><br>
+            </div>
+        </div>
+    </div>
+
+    <!--
+        Match ended popup
+        Author: Marek Dohnal
+    -->
+    {% if concl_displ %}
+        <div id="match_concl" class="popup-bkgr">
+            <span class="helper"></span>
+            <div>
+                <div class="popupCloseButton">&times;</div>
+                <div id="popup-title">MATCH ENDED</div>
+                The winner is: {{ matches.first.winner }}<br>
+                New elo: {{ elo }}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if quit_displ %}
+        <div id="match_quit" class="popup-bkgr">
+            <span class="helper"></span>
+            <div>
+                <div class="popupCloseButton">&times;</div>
+                <div id="popup-title">MATCH QUIT</div>
+            </div>
+        </div>
+    {% endif %}
+
+{% else %}
+    <meta http-equiv="refresh" content="0; URL=login/" />
+{% endif %}
+
+    <!-- JQuery script -->
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+
+    <!--
+        Script for the popup
+        Author: Marek Dohnal
+    -->
+    <script>
+        $(window).on("load", function () {
+            $(".NEW").click(function(){
+               $('#game_sel').show();
+            });
+            $('#game_sel').click(function(){
+                $('.popup-bkgr').hide();
+            });
+            $('.popupCloseButton').click(function(){
+                $('.popup-bkgr').hide();
+            });
+
+            $("#create_game").click(function(){
+                location.pathname = "match/new";
+            });
+            $("#join_game").click(function(){
+               location.pathname = "join_game";
+            });
+        });
+    </script>
+  </body>
+</html>
